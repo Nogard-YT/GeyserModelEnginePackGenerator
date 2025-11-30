@@ -72,7 +72,7 @@ public class Entity {
 
         json = new JsonParser().parse(TEMPLATE.replace("%entity_id%", modelId)
                 .replace("%geometry%", "geometry.meg_" + modelId)
-                .replace("%texture%", "textures/entity/" + path + modelId)
+                .replace("%texture%", "textures/entity/" + modelId)
                 .replace("%look_at_target%",  modelConfig.isEnableHeadRotation() ? "animation." + modelId + ".look_at_target" : "animation.none")
                 .replace("%material%", modelConfig.getMaterial())).getAsJsonObject();
 
@@ -89,7 +89,7 @@ public class Entity {
 
         if (modelConfig.getPerTextureUvSize().isEmpty()) {
             jsonGeometry.addProperty("default", "geometry.meg_" + modelId);
-            jsonTextures.addProperty("default", "textures/entity/" + path + modelId + "/" + textureMap.keySet().stream().findFirst().orElse("def"));
+            jsonTextures.addProperty("default", "textures/entity/" + modelId + "/" + textureMap.keySet().stream().findFirst().orElse("def"));
         }
 
         for (String name : textureMap.keySet()) {
@@ -101,7 +101,7 @@ public class Entity {
                 String suffix = size[0] + "_" + size[1];
 
                 jsonGeometry.addProperty("t_" + suffix, "geometry.meg_" + modelId + "_" + suffix);
-                jsonTextures.addProperty(name, "textures/entity/" + path + modelId + "/" + name);
+                jsonTextures.addProperty(name, "textures/entity/" + modelId + "/" + name);
 
             }
             jsonRenderControllers.add("controller.render." + modelId + "_" + name);
